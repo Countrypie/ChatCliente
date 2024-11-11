@@ -1,12 +1,16 @@
-package paquete.chatcliente;
 
-import GUI.GUIIniciarSesion;
+
 import java.net.MalformedURLException;
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import socrates.server.CallbackServerInterface;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import paquete.chatcliente.CallbackCliente;
+import paquete.chatcliente.User;
+import paquete.chatcliente.IPeer;
 
 //Aplicacion con la ejecucion principal en la parte de cliente y el servidor de objetos
 public class ChatCliente {
@@ -16,15 +20,20 @@ public class ChatCliente {
     private static final String HOSTNAME = "localhost";
     public static String REGISTRY_URL = "rmi://" + HOSTNAME + ":" + RMIPORT + "/callback";
     
+    
+    //test, cambiar entre 0 y 1 para conversacion
+    public static final int PEER=1;
+    
     //Configuracion del puerto que usara el usuario
-    private static final int PUERTOCLIENTE = 1099;
+    private static final int PUERTOCLIENTE = 1099 +PEER;
     private static final String DIRECCIONCLIENTE = "rmi://localhost:" + PUERTOCLIENTE + "/ChatCliente";
     
     
-    public static void main(){
+    
+    public static void main(String[] args){
         
         //Se inicia la conexion con el servidor de objetos
-        CallbackServerInterface server=null;
+        /*CallbackServerInterface server=null;
         try{
             server = (CallbackServerInterface) Naming.lookup(REGISTRY_URL);
         }catch(Exception ex){
@@ -57,17 +66,61 @@ public class ChatCliente {
             clienteActual=new CallbackCliente(usuarioActual);
         }catch(Exception ex){
             System.out.println("No se ha podido crear un cliente remoto.");
-            //!server.logOut(, );
+            server.logOut(, );
             System.exit(1);
+        }
+        */
+        //crea usuario
+        User usuarioActual=null;
+        if(PEER==0){
+            usuarioActual=new User("pepito","1234",DIRECCIONCLIENTE);
+        
+        }else{
+            usuarioActual=new User("jose","1234",DIRECCIONCLIENTE);
         }
         
         //Se registra el nuevo cliente en un nuevo servidor de objetos
+        CallbackCliente clienteActual=null;
+        try {
+            clienteActual = new CallbackCliente(usuarioActual);
+        } catch (RemoteException ex) {
+            Logger.getLogger(ChatCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //registra
         try{
             registrarObjeto(clienteActual);
         }catch(Exception ex){
             System.out.println("No se ha podido conectar con el servidor de objetos.");
-            //!Server.logOut(,);
+            //Server.logOut(,);
             System.exit(1);
+        }
+        //espera
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ChatCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(PEER==0){
+            try{
+                Registry registry = LocateRegistry.getRegistry("localhost", PUERTOCLIENTE + 1);
+                registry.list(); // Esto debería funcionar si el registro está disponible
+                IPeer otroCliente = (IPeer) Naming.lookup("rmi://localhost:" + (PUERTOCLIENTE+1) + "/ChatCliente");
+                System.out.println("rmi://localhost:" + (PUERTOCLIENTE+1) + "/ChatCliente");
+                otroCliente.enviarMensaje(usuarioActual,"Hola don Pepito");
+            }catch(MalformedURLException | NotBoundException | RemoteException ex){
+                System.out.println("No se ha podido conectar con el servidor de objetos."+ex.getMessage());
+                System.exit(1);
+            }
+        }else{
+            try{
+                IPeer otroCliente = (IPeer) Naming.lookup("rmi://localhost:" + (PUERTOCLIENTE-1) + "/ChatCliente");
+                System.out.println("rmi://localhost:" + (PUERTOCLIENTE-1) + "/ChatCliente");
+                otroCliente.enviarMensaje(usuarioActual,"Hola don Jose");
+            }catch(MalformedURLException | NotBoundException | RemoteException ex){
+                System.out.println("No se ha podido conectar con el servidor de objetos."+ex.getMessage());
+                System.exit(1);
+            }
         }
         
     
@@ -95,7 +148,7 @@ public class ChatCliente {
          
         //Se registra el objeto en el servidor de objetos del cliente
         Naming.rebind(DIRECCIONCLIENTE, cliente);
-        System.out.println("ChatCliente listo.");
+        System.out.println("ChatCliente listo."+DIRECCIONCLIENTE);
 
          
     }
