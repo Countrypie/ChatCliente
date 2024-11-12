@@ -1,5 +1,6 @@
 package paquete.chatcliente;
 
+import GUI.GUIChats;
 import GUI.GUIIniciarSesion;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -28,14 +29,32 @@ public class ChatCliente {
         try{
             server = (CallbackServerInterface) Naming.lookup(REGISTRY_URL);
         }catch(Exception ex){
-            System.out.println("No se ha podido conectar con el servidor de objetos.");
+            System.out.println("No se ha podido conectar con el servidor de objetos: "+ex.getMessage());
+            System.exit(1);
+        }
+        
+        //Se crea el cliente que se usara
+        CallbackCliente clienteActual=null;
+        try{
+            clienteActual=new CallbackCliente();
+        }catch(Exception ex){
+            System.out.println("No se ha podido crear un cliente remoto: "+ex.getMessage());
+            //!server.logOut(, );
+            System.exit(1);
+        }
+        
+        //Se registra el nuevo cliente en un nuevo servidor de objetos
+        try{
+            registrarObjeto(clienteActual);
+        }catch(Exception ex){
+            System.out.println("No se ha podido conectar con el servidor de objetos: "+ex.getMessage());
+            //!Server.logOut(,);
             System.exit(1);
         }
     
+        
         //Se crea una pestana de inicio de sesion
-        //Se pasara un usuario por referencia para obtener informacion del servidor
-        User usuarioActual=null;
-        GUIIniciarSesion iniciarSesion = new GUIIniciarSesion(server,usuarioActual);
+        GUIIniciarSesion iniciarSesion = new GUIIniciarSesion(server,clienteActual);
         
         //Se espera a que se cierre la pestana
         while(iniciarSesion.isVisible()){
@@ -46,30 +65,21 @@ public class ChatCliente {
             }
         }
         
-        if(usuarioActual==null){
-            System.out.println("Error, no se ha podido iniciar sesion correctamente");
-            System.exit(1);
-        }
+        //!Se completa informacion del usuario si hace falta
         
-        //Se crea el cliente que se usara
-        CallbackCliente clienteActual=null;
-        try{
-            clienteActual=new CallbackCliente(usuarioActual);
-        }catch(Exception ex){
-            System.out.println("No se ha podido crear un cliente remoto.");
-            //!server.logOut(, );
-            System.exit(1);
-        }
+        //Se crea la pestana de envio y recepcion de mensajes
+        GUIChats chats = new GUIChats();
+        //Se asocia la ventana con el cliente
+        clienteActual.setChats(chats);
         
-        //Se registra el nuevo cliente en un nuevo servidor de objetos
-        try{
-            registrarObjeto(clienteActual);
-        }catch(Exception ex){
-            System.out.println("No se ha podido conectar con el servidor de objetos.");
-            //!Server.logOut(,);
-            System.exit(1);
+        //Se espera a que se cierre la pestana
+        while(chats.isVisible()){
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        
     
     }
     
