@@ -1,12 +1,12 @@
-package paquete.chatcliente;
+package socrates.user;
 
-import java.io.Serializable;
+
 import java.util.ArrayList;
+import paquete.chatcliente.ICallbackCliente;
 
-public class User implements Serializable{
+public class User {
+    private ICallbackCliente client;
     private String username;
-    private String password;
-    private String remoteAddress;
     private ArrayList<String> friends;
     private ArrayList<String> friendsConnected;
     private ArrayList<String> friendRequests;
@@ -15,14 +15,22 @@ public class User implements Serializable{
     // private MessageInterface messageInterface;
 
     // Constructor
-    public User(String username, String password, String remoteAddress) {
+    public User(ICallbackCliente client, String username) {
         this.username = username;
-        this.password = password;
-        this.remoteAddress = remoteAddress;
         this.friends = new ArrayList<>();
         this.friendsConnected = new ArrayList<>();
         this.friendRequests = new ArrayList<>();
         this.connected = false;
+    }
+
+
+    public User(ICallbackCliente client, String username, ArrayList<String> friends, ArrayList<String> friendsConnected, ArrayList<String> friendRequests) {
+        this.client = client;
+        this.username = username;
+        this.friends = friends;
+        this.friendsConnected = friendsConnected;
+        this.friendRequests = friendRequests;
+        this.connected = true;
     }
 
     // Getters and Setters
@@ -33,22 +41,6 @@ public class User implements Serializable{
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRemoteAddress() {
-        return remoteAddress;
-    }
-
-    public void setRemoteAddress(String remoteAddress) {
-        this.remoteAddress = remoteAddress;
     }
 
     public ArrayList<String> getFriends() {
@@ -81,6 +73,14 @@ public class User implements Serializable{
 
     public void setConnected(boolean connected) {
         this.connected = connected;
+    }
+
+    public ICallbackCliente getClient() {
+        return client;
+    }
+
+    public void setClient(ICallbackCliente client) {
+        this.client = client;
     }
 
     // Get the user's RMI address

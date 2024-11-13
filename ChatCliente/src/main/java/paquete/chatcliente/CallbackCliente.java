@@ -3,72 +3,103 @@ package paquete.chatcliente;
 import GUI.GUIChats;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import socrates.server.CallbackServerInterface;
+import socrates.user.User;
 
 //Objeto del cliente que implementa las llamadas remotas
 public class CallbackCliente extends UnicastRemoteObject implements ICallbackCliente, IPeer{
     
-    private User usuarioCliente=null;
+    private User usuario=null;
+    private CallbackServerInterface server=null;
     private GUIChats chats=null;
+    private String contrasena=null;
 
-    public CallbackCliente(User usuario) throws RemoteException {
+    public CallbackCliente(CallbackServerInterface server, User usuario) throws RemoteException {
         super();
         
-        this.usuarioCliente=usuario;
+        this.server=server;
+        this.usuario=usuario;
     }
     public CallbackCliente() throws RemoteException {
         super();
     }
 
     @Override
-    public void amigoConectado(User usuario) {
+    public void amigoConectado(String nombreUsuario) {
+        this.chats.amigoConectado(nombreUsuario);
+    }
+
+    @Override
+    public void amigoDesconectado(String nombreUsuario) {
+        this.chats.amigoDesconectado(nombreUsuario);
+    }
+
+    @Override
+    public void recibirMensaje(String remitente, Mensaje mensaje) {
+        
+        this.chats.anadirMensaje(remitente, mensaje);
+    }
+
+    @Override
+    public void amigoNuevo(String nombreUsuario) {
+        this.chats.anadirAmigo(nombreUsuario);
+    }
+
+    @Override
+    public void amigoEliminado(String nombreUsuario) {
+        this.chats.eliminarAmigo(nombreUsuario);
+    }
+
+    @Override
+    public void solicitudAmistadNueva(String nombreUsuario) {
+        this.chats.anadirSolicitudAmistad(nombreUsuario);
+    }
+
+    @Override
+    public void solicitudAmistadAceptada(String nombreUsuario) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void amigoDesconectado(User usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void enviarMensaje(User usuario, String mensaje) {
-        System.out.println("Mensaje de "+usuario.getUsername()+": "+mensaje);
-    }
-
-    @Override
-    public void amigoNuevo(User usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void amigoEliminado(User usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void solicitudAmistadNueva(User usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void solicitudAmistadAceptada(User usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void solicitudAmistadRechazada(User usuario) {
+    public void solicitudAmistadRechazada(String nombreUsuario) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public void setUsuario(User usuarioCliente) {
-        this.usuarioCliente = usuarioCliente;
+        this.usuario = usuarioCliente;
     }
 
-    public User getUsuarioCliente() {
-        return usuarioCliente;
+    public User getUsuario() {
+        return usuario;
     }
 
-    public void setChats(GUIChats chats) {
-        this.chats = chats;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+    
+    
+
+    public void setupChats(GUIChats chats) {
+        try {
+            //Se asocia la ventana a este cliente
+            this.chats = chats;
+            
+            //Se obtiene la lista de amigos
+            usuario.setFriends(server.obtainFriendList(usuario.getUsername(), contrasena));
+            //Se obtiene la lista de amigos conectados
+            usuario.setFriendsConnected(server.obtainConnectedFriendList(usuario.getUsername(), contrasena));
+            //Se obtienen las solicitudes de amistad
+            usuario.setFriendRequests(server.obtainFriendRequests(usuario.getUsername(), contrasena));
+            
+            //Se pasa informacion del usuario a la ventana
+            chats.setup(usuario);
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(CallbackCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     

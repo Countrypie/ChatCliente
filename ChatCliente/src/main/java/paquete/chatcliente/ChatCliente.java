@@ -2,12 +2,14 @@ package paquete.chatcliente;
 
 import GUI.GUIChats;
 import GUI.GUIIniciarSesion;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import socrates.server.CallbackServerInterface;
+import socrates.user.User;
 
 //Aplicacion con la ejecucion principal en la parte de cliente y el servidor de objetos
 public class ChatCliente {
@@ -19,7 +21,7 @@ public class ChatCliente {
     
     //Configuracion del puerto que usara el usuario
     private static final int PUERTOCLIENTE = 1099;
-    private static final String DIRECCIONCLIENTE = "rmi://localhost:" + PUERTOCLIENTE + "/ChatCliente";
+    private static final String DIRECCIONBASE = "rmi://localhost:" + PUERTOCLIENTE + "/";
     
     
     public static void main(){
@@ -36,6 +38,7 @@ public class ChatCliente {
         //Se crea el cliente que se usara
         CallbackCliente clienteActual=null;
         try{
+            User usuarioActual=new User(clienteActual,null);
             clienteActual=new CallbackCliente();
         }catch(Exception ex){
             System.out.println("No se ha podido crear un cliente remoto: "+ex.getMessage());
@@ -65,12 +68,12 @@ public class ChatCliente {
             }
         }
         
-        //!Se completa informacion del usuario si hace falta
-        
         //Se crea la pestana de envio y recepcion de mensajes
         GUIChats chats = new GUIChats();
-        //Se asocia la ventana con el cliente
-        clienteActual.setChats(chats);
+        
+        //Se asocia la ventana con el cliente y se le da informacion
+        clienteActual.setupChats(chats);
+        
         
         //Se espera a que se cierre la pestana
         while(chats.isVisible()){
@@ -104,8 +107,8 @@ public class ChatCliente {
         }
          
         //Se registra el objeto en el servidor de objetos del cliente
-        Naming.rebind(DIRECCIONCLIENTE, cliente);
-        System.out.println("ChatCliente listo.");
+        Naming.rebind(DIRECCIONBASE+cliente.getUsuario().getUsername(), cliente);
+        System.out.println("ChatCliente listo en "+DIRECCIONBASE+cliente.getUsuario().getUsername());
 
          
     }

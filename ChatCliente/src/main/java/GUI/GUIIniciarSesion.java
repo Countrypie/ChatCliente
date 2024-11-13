@@ -1,16 +1,18 @@
 package GUI;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import paquete.chatcliente.CallbackCliente;
-import paquete.chatcliente.User;
+import socrates.user.User;
 import socrates.server.CallbackServerInterface;
 
 public class GUIIniciarSesion extends javax.swing.JFrame {
 
-    CallbackServerInterface server=null;
-    CallbackCliente cliente=null;
+    private CallbackServerInterface server=null;
+    private CallbackCliente cliente=null;
     
     /**
      * Creates new form GUIIniciarSesion
@@ -18,11 +20,23 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
     public GUIIniciarSesion(CallbackServerInterface server, CallbackCliente cliente) {
         initComponents();
         
+        //Se esconden los textos con mensajes de error
         TextoErrorInicioSesion.setVisible(false);
         TextoErrorRegistrarse.setVisible(false);
-        TextoErrorCambioContrasena.setVisible(true);
+        TextoErrorCambioContrasena.setVisible(false);
+        
+        //Se inicializan las variables
         this.server=server;
         this.cliente=cliente;
+        
+        //Se configura para que si se cierra la ventana pare la ejecucion del cliente
+        addWindowListener(new WindowAdapter() {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            System.out.println("Se cerro manualmente la pestaña de inicio de sesion");
+            System.exit(0);
+        }});
+        
     }
 
     /**
@@ -466,7 +480,8 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
         String nombreUsuario= CampoNombreUsuario.getText();
         String contrasena= CampoContrasena.getText();
         try{
-            User usuarioActual=server.logIn(this.cliente, nombreUsuario, contrasena);//!Ojo con lo que se haga
+            this.cliente.getUsuario().setUsername(nombreUsuario);
+            User usuarioActual=server.login(this.cliente, nombreUsuario, contrasena);//!Ojo con lo que se haga
             cliente.setUsuario(usuarioActual);
         }catch(RemoteException ex){
             System.out.println("Error en el inicio de sesion: "+ex.getMessage());
@@ -478,6 +493,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
             TextoErrorInicioSesion.setVisible(true);//Se imprime el mensaje de error para permitir colver a intentarlo
         }else{
             this.setVisible(false);//Se cierra la pestana
+            cliente.setContrasena(contrasena);
         }
         
     }//GEN-LAST:event_BotonIniciarSesionActionPerformed
@@ -498,13 +514,15 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
         if(contrasena.equals(CampoContrasena2.getText())){
 
             try {
+                this.cliente.getUsuario().setUsername(nombreUsuario);
                 User usuarioActual=server.register(cliente, nombreUsuario, contrasena);
                 cliente.setUsuario(usuarioActual);  //!Ojo con que ya este registrado
             } catch (RemoteException ex) {
                 Logger.getLogger(GUIIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
             }
-            //!Si no hay nada mas que hacer cerrar pestana
+            
             this.setVisible(false);
+            cliente.setContrasena(contrasena);
         }else{
             TextoErrorRegistrarse.setVisible(true);
         }
@@ -551,6 +569,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
         }else{
             TextoErrorCambioContrasena.setText("La contraseña se cambió correctamente");
             TextoErrorCambioContrasena.setVisible(true);
+            cliente.setContrasena(nuevaContrasena);
         }
         
     }//GEN-LAST:event_BotonCambiarContrasenaActionPerformed
@@ -583,6 +602,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
             TextoErrorCambioContrasena.setText("No se pudo borrar la cuenta");
             TextoErrorCambioContrasena.setVisible(true);
         }else{
+            this.cliente.getUsuario().setUsername(null);
             TextoErrorCambioContrasena.setText("Se ha borrado la cuenta correctamente");
             TextoErrorCambioContrasena.setVisible(true);
         }
