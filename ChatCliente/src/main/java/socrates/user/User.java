@@ -1,10 +1,11 @@
 package socrates.user;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import paquete.chatcliente.ICallbackCliente;
 
-public class User {
+public class User implements Serializable{
     private ICallbackCliente client;
     private String username;
     private ArrayList<String> friends;

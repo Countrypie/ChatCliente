@@ -13,7 +13,7 @@ public interface ICallbackCliente extends java.rmi.Remote{
     public void amigoDesconectado(String usuario) throws RemoteException;
     
     //Metodo que el servidor invoca para informar de una nueva solicitud de amistad
-    public void solicitudAmistadNueva(String usuario) throws RemoteException;a;//!Se asume que ya sera amigo, o se espera a amigoNuevo?
+    public void solicitudAmistadNueva(String usuario) throws RemoteException;//!Se asume que ya sera amigo, o se espera a amigoNuevo?
     
     //Metodo que el servidor invoca para informar al cliente que el y el nuevo
         //usuario han sido registrados como amigos
@@ -25,10 +25,10 @@ public interface ICallbackCliente extends java.rmi.Remote{
     
     //Metodo que el servidor invoca para informar que una solicitud de amistad
         //anteriormente mandada a otro usuario fue aceptada
-    public void solicitudAmistadAceptada(String usuario) throws RemoteException;a;//!Con amigoNuevo, ambas a parte o juntas?
+    public void solicitudAmistadAceptada(String usuario) throws RemoteException;//!Con amigoNuevo, ambas a parte o juntas?
     
     //Metodo que el servidor invoca para informar que una solicitud de amistad
         //anteriormente mandada a otro usuario fue rechazada
-    public void solicitudAmistadRechazada(String usuario) throws RemoteException;a;
+    public void solicitudAmistadRechazada(String usuario) throws RemoteException;
     
 }

@@ -2,7 +2,6 @@ package paquete.chatcliente;
 
 import GUI.GUIChats;
 import GUI.GUIIniciarSesion;
-import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;

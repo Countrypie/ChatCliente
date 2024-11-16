@@ -481,15 +481,15 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
         String contrasena= CampoContrasena.getText();
         try{
             this.cliente.getUsuario().setUsername(nombreUsuario);
-            User usuarioActual=server.login(this.cliente, nombreUsuario, contrasena);//!Ojo con lo que se haga
+            User usuarioActual=server.login(this.cliente, nombreUsuario, contrasena);
             cliente.setUsuario(usuarioActual);
         }catch(RemoteException ex){
             System.out.println("Error en el inicio de sesion: "+ex.getMessage());
             System.exit(1);
         }
         
-        //!Condicion de inicio de sesion incorrecto
-        if(){
+        //Condicion de inicio de sesion incorrecto
+        if(cliente.getUsuario()==null){
             TextoErrorInicioSesion.setVisible(true);//Se imprime el mensaje de error para permitir colver a intentarlo
         }else{
             this.setVisible(false);//Se cierra la pestana

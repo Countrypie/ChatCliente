@@ -94,7 +94,7 @@ public class CallbackCliente extends UnicastRemoteObject implements ICallbackCli
             usuario.setFriendRequests(server.obtainFriendRequests(usuario.getUsername(), contrasena));
             
             //Se pasa informacion del usuario a la ventana
-            chats.setup(usuario);
+            chats.setup(usuario,contrasena,server);
             
         } catch (RemoteException ex) {
             Logger.getLogger(CallbackCliente.class.getName()).log(Level.SEVERE, null, ex);
