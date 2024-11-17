@@ -161,6 +161,7 @@ public class ChatCliente {
         chats.anadirMensaje("Jose", new Mensaje("A su abuela yo la vi","Jose"));
         chats.anadirMensaje("Jose", new Mensaje("Adios don Pepito","Jose"));
         chats.anadirMensaje("Jose", new Mensaje("Adios don Jose","Pepito"));
+        
             
         try {
             Thread.sleep(2000);

@@ -59,12 +59,12 @@ public class CallbackCliente extends UnicastRemoteObject implements ICallbackCli
 
     @Override
     public void solicitudAmistadAceptada(String nombreUsuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.chats.anadirNotificacion(nombreUsuario, true);
     }
 
     @Override
     public void solicitudAmistadRechazada(String nombreUsuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.chats.anadirNotificacion(nombreUsuario, false);
     }
 
     public void setUsuario(User usuarioCliente) {
@@ -80,7 +80,7 @@ public class CallbackCliente extends UnicastRemoteObject implements ICallbackCli
     }
     
     
-
+    //Funcion que complementa al constructor de GUIChats para darle la informacion del servidor
     public void setupChats(GUIChats chats) {
         try {
             //Se asocia la ventana a este cliente
@@ -101,8 +101,4 @@ public class CallbackCliente extends UnicastRemoteObject implements ICallbackCli
         }
         
     }
-
-    
-    
-
 }
