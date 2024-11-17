@@ -43,7 +43,7 @@ public class GUIChats extends javax.swing.JFrame {
         
         //Se esconden textos de informacion
         TextoSolicitudEnviada.setVisible(false);
-
+        TextoSolicitudEliminar.setVisible(false);
     }
     
     //Funcion que anade un mensaje a la conversacion
