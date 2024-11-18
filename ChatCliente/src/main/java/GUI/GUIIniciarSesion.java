@@ -24,6 +24,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
         TextoErrorInicioSesion.setVisible(false);
         TextoErrorRegistrarse.setVisible(false);
         TextoErrorCambioContrasena.setVisible(false);
+        TextoInfoBorrarCuenta.setVisible(false);
         
         //Se inicializan las variables
         this.server=server;
@@ -36,6 +37,9 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
             System.out.println("Se cerro manualmente la pestaña de inicio de sesion");
             System.exit(0);
         }});
+        
+        //Se hace la pestana visible
+        this.setVisible(true);
         
     }
 
@@ -86,6 +90,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
 
         jTextField1.setEditable(false);
         jTextField1.setText("Introduzca el nombre de usuario:");
+        jTextField1.setBorder(null);
         jTextField1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +118,9 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
         });
 
         jTextField2.setEditable(false);
+        jTextField2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField2.setText("Introduzca la contraseña:");
+        jTextField2.setBorder(null);
         jTextField2.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +128,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
             }
         });
 
-        CampoContrasena.setText("jPasswordField1");
+        CampoContrasena.setMaximumSize(new java.awt.Dimension(64, 24));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -136,25 +143,24 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
                         .addGap(134, 134, 134)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(CampoNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(TextoErrorInicioSesion)
-                                .addComponent(jTextField2)
-                                .addComponent(CampoContrasena))
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(TextoErrorInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CampoContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(134, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(68, Short.MAX_VALUE)
+                .addContainerGap(80, Short.MAX_VALUE)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CampoNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(45, 45, 45)
                 .addComponent(BotonIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(TextoErrorInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -165,6 +171,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
 
         jTextField3.setEditable(false);
         jTextField3.setText("Introduzca el nombre de usuario:");
+        jTextField3.setBorder(null);
         jTextField3.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,6 +181,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
 
         jTextField4.setEditable(false);
         jTextField4.setText("Introduzca la contraseña:");
+        jTextField4.setBorder(null);
         jTextField4.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,18 +196,15 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
             }
         });
 
-        CampoContrasena1.setText("jPasswordField1");
-
         jTextField5.setEditable(false);
         jTextField5.setText("Vuelva a introducir la contraseña:");
+        jTextField5.setBorder(null);
         jTextField5.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
             }
         });
-
-        CampoContrasena2.setText("jPasswordField1");
 
         TextoErrorRegistrarse.setEditable(false);
         TextoErrorRegistrarse.setText("Las contraseñas no coinciden");
@@ -220,20 +225,22 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(CampoNombreUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CampoContrasena1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CampoContrasena2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(191, 191, 191)
                         .addComponent(BotonRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(150, 150, 150)
-                        .addComponent(TextoErrorRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(TextoErrorRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(CampoContrasena1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CampoContrasena2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CampoNombreUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -251,7 +258,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoContrasena2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(BotonRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(TextoErrorRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -262,6 +269,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
 
         jTextField6.setEditable(false);
         jTextField6.setText("Introduzca el nombre de usuario:");
+        jTextField6.setBorder(null);
         jTextField6.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,6 +279,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
 
         jTextField7.setEditable(false);
         jTextField7.setText("Introduzca la contraseña antigua:");
+        jTextField7.setBorder(null);
         jTextField7.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,18 +287,15 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
             }
         });
 
-        CampoContrasena3.setText("jPasswordField1");
-
         jTextField8.setEditable(false);
-        jTextField8.setText("Introduzca la nueva contraseña");
+        jTextField8.setText("Introduzca la nueva contraseña:");
+        jTextField8.setBorder(null);
         jTextField8.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextField8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField8ActionPerformed(evt);
             }
         });
-
-        CampoContrasena4.setText("jPasswordField1");
 
         BotonCambiarContrasena.setText("Cambiar Contraseña");
         BotonCambiarContrasena.addActionListener(new java.awt.event.ActionListener() {
@@ -322,17 +328,19 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(126, 126, 126)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(CampoNombreUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CampoContrasena3, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CampoContrasena4, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(171, 171, 171)
-                                .addComponent(BotonCambiarContrasena)))
+                                .addComponent(BotonCambiarContrasena))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(126, 126, 126)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(CampoContrasena3, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(CampoNombreUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CampoContrasena4, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 136, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -343,7 +351,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
                 .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoNombreUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoContrasena3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -351,9 +359,9 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
                 .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoContrasena4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(BotonCambiarContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(34, 34, 34)
                 .addComponent(TextoErrorCambioContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
@@ -362,6 +370,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
 
         jTextField9.setEditable(false);
         jTextField9.setText("Introduzca el nombre de usuario:");
+        jTextField9.setBorder(null);
         jTextField9.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextField9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -371,6 +380,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
 
         jTextField10.setEditable(false);
         jTextField10.setText("Introduzca la contraseña:");
+        jTextField10.setBorder(null);
         jTextField10.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextField10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -378,7 +388,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
             }
         });
 
-        CampoContrasena5.setText("jPasswordField1");
+        CampoContrasena5.setMaximumSize(new java.awt.Dimension(64, 24));
 
         BotonBorrarCuenta.setText("Borrar Cuenta");
         BotonBorrarCuenta.addActionListener(new java.awt.event.ActionListener() {
@@ -412,23 +422,23 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
                         .addGap(134, 134, 134)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(CampoNombreUsuario3, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                            .addComponent(jTextField10)
-                            .addComponent(CampoContrasena5)
+                            .addComponent(CampoContrasena5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(TextoInfoBorrarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)))))
+                                .addGap(10, 10, 10))
+                            .addComponent(jTextField9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(135, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(72, Short.MAX_VALUE)
+                .addContainerGap(84, Short.MAX_VALUE)
                 .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CampoNombreUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoContrasena5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
@@ -479,21 +489,27 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
         
         String nombreUsuario= CampoNombreUsuario.getText();
         String contrasena= CampoContrasena.getText();
-        try{
-            this.cliente.getUsuario().setUsername(nombreUsuario);
-            User usuarioActual=server.login(this.cliente, nombreUsuario, contrasena);
-            cliente.setUsuario(usuarioActual);
-        }catch(RemoteException ex){
-            System.out.println("Error en el inicio de sesion: "+ex.getMessage());
-            System.exit(1);
-        }
         
-        //Condicion de inicio de sesion incorrecto
-        if(cliente.getUsuario()==null){
-            TextoErrorInicioSesion.setVisible(true);//Se imprime el mensaje de error para permitir colver a intentarlo
-        }else{
-            this.setVisible(false);//Se cierra la pestana
-            cliente.setContrasena(contrasena);
+        if(!"".equals(nombreUsuario) && !"".equals(contrasena)){
+            
+            //Se invoca la funcion del servidor para hacer login
+            try{
+                this.cliente.getUsuario().setUsername(nombreUsuario);
+                User usuarioActual=server.login(this.cliente, nombreUsuario, contrasena);
+                cliente.setUsuario(usuarioActual);System.out.println("Debug, "+usuarioActual.getUsername()+usuarioActual.getFriends());
+            }catch(RemoteException ex){
+                System.out.println("Error en el inicio de sesion: "+ex.getMessage());
+                System.exit(1);
+            }
+
+            //Condicion de inicio de sesion incorrecto
+            if(cliente.getUsuario()==null){
+                TextoErrorInicioSesion.setVisible(true);//Se imprime el mensaje de error para permitir colver a intentarlo
+                this.revalidate();this.repaint();
+            }else{
+                this.setVisible(false);//Se cierra la pestana
+                cliente.setContrasena(contrasena);
+            }
         }
         
     }//GEN-LAST:event_BotonIniciarSesionActionPerformed
@@ -525,6 +541,7 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
             cliente.setContrasena(contrasena);
         }else{
             TextoErrorRegistrarse.setVisible(true);
+            this.revalidate();this.repaint();
         }
         
         
@@ -566,9 +583,11 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
         if(!exito){
             TextoErrorCambioContrasena.setText("La contraseña antigua es incorrecta");
             TextoErrorCambioContrasena.setVisible(true);
+            this.revalidate();this.repaint();
         }else{
             TextoErrorCambioContrasena.setText("La contraseña se cambió correctamente");
             TextoErrorCambioContrasena.setVisible(true);
+            this.revalidate();this.repaint();
             cliente.setContrasena(nuevaContrasena);
         }
         
@@ -601,10 +620,12 @@ public class GUIIniciarSesion extends javax.swing.JFrame {
         if(!exito){
             TextoErrorCambioContrasena.setText("No se pudo borrar la cuenta");
             TextoErrorCambioContrasena.setVisible(true);
+            this.revalidate();this.repaint();
         }else{
             this.cliente.getUsuario().setUsername(null);
             TextoErrorCambioContrasena.setText("Se ha borrado la cuenta correctamente");
             TextoErrorCambioContrasena.setVisible(true);
+            this.revalidate();this.repaint();
         }
     }//GEN-LAST:event_BotonBorrarCuentaActionPerformed
 

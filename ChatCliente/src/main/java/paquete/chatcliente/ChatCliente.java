@@ -23,7 +23,7 @@ public class ChatCliente {
     private static final String DIRECCIONBASE = "rmi://localhost:" + PUERTOCLIENTE + "/";
     
     
-    public static void main(){
+    public static void main(String[] args){
         
         //Se inicia la conexion con el servidor de objetos
         CallbackServerInterface server=null;
@@ -38,25 +38,16 @@ public class ChatCliente {
         CallbackCliente clienteActual=null;
         try{
             User usuarioActual=new User(clienteActual,null);
-            clienteActual=new CallbackCliente();
+            clienteActual=new CallbackCliente(server,usuarioActual);
         }catch(Exception ex){
             System.out.println("No se ha podido crear un cliente remoto: "+ex.getMessage());
             //!server.logOut(, );
             System.exit(1);
         }
         
-        //Se registra el nuevo cliente en un nuevo servidor de objetos
-        try{
-            registrarObjeto(clienteActual);
-        }catch(Exception ex){
-            System.out.println("No se ha podido conectar con el servidor de objetos: "+ex.getMessage());
-            //!Server.logOut(,);
-            System.exit(1);
-        }
-    
-        
         //Se crea una pestana de inicio de sesion
         GUIIniciarSesion iniciarSesion = new GUIIniciarSesion(server,clienteActual);
+        
         
         //Se espera a que se cierre la pestana
         while(iniciarSesion.isVisible()){
@@ -65,6 +56,17 @@ public class ChatCliente {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+        
+        
+        //Se registra el nuevo cliente en un nuevo servidor de objetos
+        try{
+            registrarObjeto(clienteActual);
+            //!Se actualiza el objeto remoto en el servidor
+            server.updateRMIAddress(clienteActual.getUsuario().getUsername(),clienteActual.getContrasena(),clienteActual);
+        }catch(Exception ex){
+            System.out.println("No se ha podido registrar un cliente remoto: "+ex.getMessage());
+            System.exit(1);
         }
         
         //Se crea la pestana de envio y recepcion de mensajes

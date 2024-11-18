@@ -2,9 +2,10 @@ package paquete.chatcliente;
 
 //Clase que encapsula los datos relativos a un mensaje
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
-public class Mensaje {
+public class Mensaje implements Serializable{
 
     private String contenido;
     private String remitente;

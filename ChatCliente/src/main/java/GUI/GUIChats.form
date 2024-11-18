@@ -195,6 +195,9 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JTabbedPane" name="TabPaneGestion">
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Eliminar Amigo"/>
+          </AccessibilityProperties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Gestionar Amigos">
@@ -315,8 +318,8 @@
             <Container class="javax.swing.JPanel" name="PestanaAnadirAmigo1">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Enviar Solicitud">
-                    <Property name="tabTitle" type="java.lang.String" value="Enviar Solicitud"/>
+                  <JTabbedPaneConstraints tabName="Eliminar Amigo">
+                    <Property name="tabTitle" type="java.lang.String" value="Eliminar Amigo"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>

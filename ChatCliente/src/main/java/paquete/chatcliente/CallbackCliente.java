@@ -78,27 +78,37 @@ public class CallbackCliente extends UnicastRemoteObject implements ICallbackCli
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+    
+    
     
     
     //Funcion que complementa al constructor de GUIChats para darle la informacion del servidor
     public void setupChats(GUIChats chats) {
-        try {
+        //try {
             //Se asocia la ventana a este cliente
             this.chats = chats;
             
+            /*//!Si no se hace ya
             //Se obtiene la lista de amigos
             usuario.setFriends(server.obtainFriendList(usuario.getUsername(), contrasena));
             //Se obtiene la lista de amigos conectados
             usuario.setFriendsConnected(server.obtainConnectedFriendList(usuario.getUsername(), contrasena));
             //Se obtienen las solicitudes de amistad
-            usuario.setFriendRequests(server.obtainFriendRequests(usuario.getUsername(), contrasena));
+            usuario.setFriendRequests(server.obtainFriendRequests(usuario.getUsername(), contrasena));*/
             
             //Se pasa informacion del usuario a la ventana
             chats.setup(usuario,contrasena,server);
             
-        } catch (RemoteException ex) {
+            //Se hace visible a la ventana
+            chats.setVisible(true);
+            
+        /*} catch (RemoteException ex) {
             Logger.getLogger(CallbackCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         
     }
 }

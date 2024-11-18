@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.Color;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -53,7 +52,8 @@ public class GUIChats extends javax.swing.JFrame {
         if(conversacionActual!=null){
             conversacionActual.add(mensaje);
         
-            this.revalidate();this.repaint();
+            //Para redibujar se llama a cambiarConversacion, asi actualiza los mensajes presentes
+            this.cambiarConversacion(conversacion);
         }
     }
     
@@ -301,7 +301,7 @@ public class GUIChats extends javax.swing.JFrame {
             //Si no hay referencia, se obtiene y se guarda
             try {
                 String nuevaReferencia=this.server.startChat(this.usuario.getUsername(), usuario, this.contrasena);
-                objetoRemoto = (IPeer) Naming.lookup(referencias.get(usuario));
+                objetoRemoto = (IPeer) Naming.lookup(nuevaReferencia);
                 this.referencias.put(usuario, nuevaReferencia);
             } catch (Exception ex1) {
                 Logger.getLogger(GUIChats.class.getName()).log(Level.SEVERE, null, ex1);
@@ -558,9 +558,10 @@ public class GUIChats extends javax.swing.JFrame {
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
-        TabPaneGestion.addTab("Enviar Solicitud", PestanaAnadirAmigo1);
+        TabPaneGestion.addTab("Eliminar Amigo", PestanaAnadirAmigo1);
 
         Pestanas.addTab("Gestionar Amigos", TabPaneGestion);
+        TabPaneGestion.getAccessibleContext().setAccessibleName("Eliminar Amigo");
 
         BotonCerrarSesion.setText("Cerrar Sesión");
         BotonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -646,6 +647,7 @@ public class GUIChats extends javax.swing.JFrame {
         try {
             if(this.server!=null)
                 this.server.logOut(this.usuario.getUsername(), contrasena);
+                System.exit(0);
         } catch (RemoteException ex) {
             Logger.getLogger(GUIChats.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -703,7 +705,7 @@ public class GUIChats extends javax.swing.JFrame {
                 try {
                     //Se envia el mensaje
                     IPeer usuarioRemoto=(IPeer) Naming.lookup(direccion);
-                    usuarioRemoto.recibirMensaje(this.usuario.getUsername(), mensaje);
+                    usuarioRemoto.recibirMensaje(this.usuario.getUsername(), mensaje);System.out.println(this.usuario.getUsername());
                     
                     //Se actualiza la informacion a la GUI local
                     CampoMensaje.setText("");
