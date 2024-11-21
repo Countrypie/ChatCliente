@@ -49,6 +49,9 @@ public class GUIPanelNotificacion extends javax.swing.JPanel {
         CampoNombre = new javax.swing.JTextField();
         CampoAceptado = new javax.swing.JTextField();
 
+        setMaximumSize(new java.awt.Dimension(358, 90));
+        setMinimumSize(new java.awt.Dimension(358, 90));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Perfil.png"))); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(244, 244, 244));

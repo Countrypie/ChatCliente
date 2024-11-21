@@ -315,7 +315,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="PestanaAnadirAmigo1">
+            <Container class="javax.swing.JPanel" name="PestanaEliminarAmigo">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="Eliminar Amigo">
@@ -335,7 +335,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
-                                  <Component id="BotonEnviarSolicitud1" min="-2" pref="138" max="-2" attributes="0"/>
+                                  <Component id="BotonEliminarAmigo" min="-2" pref="138" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
@@ -365,7 +365,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="CampoNombreEliminar" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="BotonEnviarSolicitud1" min="-2" pref="60" max="-2" attributes="0"/>
+                          <Component id="BotonEliminarAmigo" min="-2" pref="60" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                           <Component id="TextoSolicitudEliminar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="66" max="32767" attributes="0"/>
@@ -395,7 +395,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="CampoNombreEliminar">
                 </Component>
-                <Component class="javax.swing.JButton" name="BotonEnviarSolicitud1">
+                <Component class="javax.swing.JButton" name="BotonEliminarAmigo">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f2" green="f2" red="f2" type="rgb"/>
@@ -408,7 +408,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonEnviarSolicitud1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonEliminarAmigoActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="TextoSolicitudEliminar">

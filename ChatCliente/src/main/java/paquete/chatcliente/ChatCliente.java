@@ -75,7 +75,7 @@ public class ChatCliente {
         //Se asocia la ventana con el cliente y se le da informacion
         clienteActual.setupChats(chats);
         
-        
+        chats.testFun();
         //Se espera a que se cierre la pestana
         while(chats.isVisible()){
             try {

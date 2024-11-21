@@ -53,7 +53,8 @@ public class GUIChats extends javax.swing.JFrame {
             conversacionActual.add(mensaje);
         
             //Para redibujar se llama a cambiarConversacion, asi actualiza los mensajes presentes
-            this.cambiarConversacion(conversacion);
+            if(this.chatActual.equals(conversacion))
+                this.cambiarConversacion(conversacion);
         }
     }
     
@@ -164,15 +165,8 @@ public class GUIChats extends javax.swing.JFrame {
                 }
             }
 
-            //Se actualiza la lista de amigos y de amigos conectados
-            try {
-                this.usuario.setFriends(this.server.obtainFriendList(
-                        this.usuario.getUsername(), this.contrasena));
-                this.usuario.setFriendsConnected(this.server.obtainConnectedFriendList(
-                        this.usuario.getUsername(), this.contrasena));
-            } catch (RemoteException ex) {
-                Logger.getLogger(GUIChats.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            //Se actualiza la lista de amigos
+            this.usuario.getFriends().remove(examigo);
 
             //Se elimina la conversacion
             this.conversaciones.remove(examigo);
@@ -324,6 +318,7 @@ public class GUIChats extends javax.swing.JFrame {
                 break;
             }
         }
+        ScrollPaneNotificaciones.revalidate();ScrollPaneNotificaciones.repaint();
     }
     
     //Funcion que anade una notificacion sobre una solicitud de amistad anteriormente enviada
@@ -335,6 +330,16 @@ public class GUIChats extends javax.swing.JFrame {
         PanelNotificaciones.add(panel);
         
         ScrollPaneNotificaciones.revalidate();ScrollPaneNotificaciones.repaint();
+    }
+    
+    
+    public void testFun(){
+    
+        this.anadirSolicitudAmistad("Jose");
+        this.anadirSolicitudAmistad("Carmen");
+        this.anadirNotificacion("Carmen", true);
+        this.anadirNotificacion("Carmen2", false);
+        
     }
     
 
@@ -363,11 +368,11 @@ public class GUIChats extends javax.swing.JFrame {
         CampoNombreSolicitud = new javax.swing.JTextField();
         BotonEnviarSolicitud = new javax.swing.JButton();
         TextoSolicitudEnviada = new javax.swing.JTextField();
-        PestanaAnadirAmigo1 = new javax.swing.JPanel();
+        PestanaEliminarAmigo = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         CampoNombreEliminar = new javax.swing.JTextField();
-        BotonEnviarSolicitud1 = new javax.swing.JButton();
+        BotonEliminarAmigo = new javax.swing.JButton();
         TextoSolicitudEliminar = new javax.swing.JTextField();
         BotonCerrarSesion = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -506,12 +511,12 @@ public class GUIChats extends javax.swing.JFrame {
         jTextField2.setBorder(null);
         jTextField2.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
-        BotonEnviarSolicitud1.setBackground(new java.awt.Color(242, 242, 242));
-        BotonEnviarSolicitud1.setText("Eliminar Amigo");
-        BotonEnviarSolicitud1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        BotonEnviarSolicitud1.addActionListener(new java.awt.event.ActionListener() {
+        BotonEliminarAmigo.setBackground(new java.awt.Color(242, 242, 242));
+        BotonEliminarAmigo.setText("Eliminar Amigo");
+        BotonEliminarAmigo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BotonEliminarAmigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonEnviarSolicitud1ActionPerformed(evt);
+                BotonEliminarAmigoActionPerformed(evt);
             }
         });
 
@@ -519,32 +524,32 @@ public class GUIChats extends javax.swing.JFrame {
         TextoSolicitudEliminar.setText("Solicitud enviada correctamente");
         TextoSolicitudEliminar.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
-        javax.swing.GroupLayout PestanaAnadirAmigo1Layout = new javax.swing.GroupLayout(PestanaAnadirAmigo1);
-        PestanaAnadirAmigo1.setLayout(PestanaAnadirAmigo1Layout);
-        PestanaAnadirAmigo1Layout.setHorizontalGroup(
-            PestanaAnadirAmigo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PestanaAnadirAmigo1Layout.createSequentialGroup()
-                .addGroup(PestanaAnadirAmigo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PestanaAnadirAmigo1Layout.createSequentialGroup()
+        javax.swing.GroupLayout PestanaEliminarAmigoLayout = new javax.swing.GroupLayout(PestanaEliminarAmigo);
+        PestanaEliminarAmigo.setLayout(PestanaEliminarAmigoLayout);
+        PestanaEliminarAmigoLayout.setHorizontalGroup(
+            PestanaEliminarAmigoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PestanaEliminarAmigoLayout.createSequentialGroup()
+                .addGroup(PestanaEliminarAmigoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PestanaEliminarAmigoLayout.createSequentialGroup()
                         .addGap(140, 140, 140)
                         .addComponent(jLabel2))
-                    .addGroup(PestanaAnadirAmigo1Layout.createSequentialGroup()
+                    .addGroup(PestanaEliminarAmigoLayout.createSequentialGroup()
                         .addGap(115, 115, 115)
-                        .addComponent(BotonEnviarSolicitud1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PestanaAnadirAmigo1Layout.createSequentialGroup()
+                        .addComponent(BotonEliminarAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PestanaEliminarAmigoLayout.createSequentialGroup()
                         .addGap(64, 64, 64)
-                        .addGroup(PestanaAnadirAmigo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(PestanaEliminarAmigoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(TextoSolicitudEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PestanaAnadirAmigo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(PestanaAnadirAmigo1Layout.createSequentialGroup()
+                            .addGroup(PestanaEliminarAmigoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(PestanaEliminarAmigoLayout.createSequentialGroup()
                                     .addGap(49, 49, 49)
                                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(CampoNombreEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
-        PestanaAnadirAmigo1Layout.setVerticalGroup(
-            PestanaAnadirAmigo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PestanaAnadirAmigo1Layout.createSequentialGroup()
+        PestanaEliminarAmigoLayout.setVerticalGroup(
+            PestanaEliminarAmigoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PestanaEliminarAmigoLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jLabel2)
                 .addGap(38, 38, 38)
@@ -552,13 +557,13 @@ public class GUIChats extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CampoNombreEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
-                .addComponent(BotonEnviarSolicitud1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BotonEliminarAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(TextoSolicitudEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
-        TabPaneGestion.addTab("Eliminar Amigo", PestanaAnadirAmigo1);
+        TabPaneGestion.addTab("Eliminar Amigo", PestanaEliminarAmigo);
 
         Pestanas.addTab("Gestionar Amigos", TabPaneGestion);
         TabPaneGestion.getAccessibleContext().setAccessibleName("Eliminar Amigo");
@@ -647,10 +652,10 @@ public class GUIChats extends javax.swing.JFrame {
         try {
             if(this.server!=null)
                 this.server.logOut(this.usuario.getUsername(), contrasena);
-                System.exit(0);
         } catch (RemoteException ex) {
             Logger.getLogger(GUIChats.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.exit(0);
     }//GEN-LAST:event_formWindowClosed
 
     private void BotonEnviarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEnviarSolicitudActionPerformed
@@ -667,10 +672,15 @@ public class GUIChats extends javax.swing.JFrame {
                 TextoSolicitudEnviada.setText("No se pudo enviar la solicitud");
                 TextoSolicitudEnviada.setVisible(true);
             }
+        }else{
+            TextoSolicitudEnviada.setText("Ya es amigo de este usuario");
+            TextoSolicitudEnviada.setVisible(true);
         }
+        
+        PestanaAnadirAmigo.revalidate();PestanaAnadirAmigo.repaint();
     }//GEN-LAST:event_BotonEnviarSolicitudActionPerformed
 
-    private void BotonEnviarSolicitud1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEnviarSolicitud1ActionPerformed
+    private void BotonEliminarAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarAmigoActionPerformed
         String examigo=CampoNombreEliminar.getText();
         
         //Solo si era amigo del usuario
@@ -688,7 +698,9 @@ public class GUIChats extends javax.swing.JFrame {
             TextoSolicitudEliminar.setText("Esta persona no es un amigo suyo");
             TextoSolicitudEliminar.setVisible(true);
         }
-    }//GEN-LAST:event_BotonEnviarSolicitud1ActionPerformed
+        
+        PestanaEliminarAmigo.revalidate();PestanaEliminarAmigo.repaint();
+    }//GEN-LAST:event_BotonEliminarAmigoActionPerformed
 
     private void BotonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEnviarActionPerformed
         //Se construye el mensaje
@@ -766,9 +778,9 @@ public class GUIChats extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonCerrarSesion;
+    private javax.swing.JButton BotonEliminarAmigo;
     private javax.swing.JButton BotonEnviar;
     private javax.swing.JButton BotonEnviarSolicitud;
-    private javax.swing.JButton BotonEnviarSolicitud1;
     private javax.swing.JTextArea CampoMensaje;
     private javax.swing.JTextField CampoNombreEliminar;
     private javax.swing.JTextField CampoNombreSolicitud;
@@ -778,7 +790,7 @@ public class GUIChats extends javax.swing.JFrame {
     private javax.swing.JPanel PanelSolicitudes;
     private javax.swing.JScrollPane PestanaAmigos;
     private javax.swing.JPanel PestanaAnadirAmigo;
-    private javax.swing.JPanel PestanaAnadirAmigo1;
+    private javax.swing.JPanel PestanaEliminarAmigo;
     private javax.swing.JScrollPane PestanaSolicitudes;
     private javax.swing.JTabbedPane Pestanas;
     private javax.swing.JScrollPane ScrollPaneNotificaciones;

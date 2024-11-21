@@ -39,6 +39,9 @@ public class GUISolicitudAmistad extends javax.swing.JPanel {
         BotonAceptar = new javax.swing.JButton();
         BotonRechazar = new javax.swing.JButton();
 
+        setMaximumSize(new java.awt.Dimension(334, 119));
+        setMinimumSize(new java.awt.Dimension(334, 119));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Perfil.png"))); // NOI18N
 
         jTextField1.setEditable(false);
